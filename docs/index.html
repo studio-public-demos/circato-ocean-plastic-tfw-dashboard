@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Circato TFW — Interactive Evidence Package</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: system-ui, -apple-system, sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; }
+.hero { background: linear-gradient(135deg, #0f172a 0%, #0ea5e9 50%, #059669 100%); padding: 36px 20px 48px; text-align: center; }
+.hero h1 { font-size: clamp(20px, 4vw, 32px); font-weight: 800; color: white; margin-bottom: 6px; }
+.hero p { font-size: 14px; opacity: 0.9; }
+.container { max-width: 900px; margin: -16px auto 0; padding: 0 16px 40px; position: relative; z-index: 1; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+.card { background: #1e293b; border: 1px solid #334155; border-radius: 10px; padding: 18px; transition: transform 0.15s; }
+.card:hover { transform: translateY(-2px); }
+.card .icon { font-size: 32px; margin-bottom: 8px; }
+.card h2 { font-size: 15px; color: #e2e8f0; margin-bottom: 6px; }
+.card p { font-size: 12px; color: #94a3b8; line-height: 1.5; margin-bottom: 12px; }
+.card a { display: inline-block; padding: 7px 16px; background: #3b82f6; color: white; text-decoration: none; border-radius: 5px; font-size: 12px; font-weight: 600; }
+.card:nth-child(1) a { background: #3b82f6; }
+.card:nth-child(2) a { background: #8b5cf6; }
+.card:nth-child(3) a { background: #06b6d4; }
+.card:nth-child(4) a { background: #059669; }
+.note { background: #1e293b; border: 1px solid #334155; border-radius: 8px; padding: 12px; margin-top: 16px; font-size: 11px; color: #94a3b8; }
+.note a { color: #38bdf8; }
+footer { text-align: center; padding: 12px; font-size: 10px; color: #475569; }
+footer a { color: #3b82f6; text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="hero">
+  <h1>Circato — Interactive Evidence Package</h1>
+  <p>Ocean-Bound MLP Waste to ThermoFused Walls | Built with NebulaCloud Studio</p>
+</div>
+<div class="container">
+  <div class="grid">
+    <div class="card">
+      <div class="icon">&#127758;</div>
+      <h2>Coastal Leakage Hotspot Map</h2>
+      <p>Interactive map of 36 Indian districts with leakage risk tiers, state boundaries, river systems, and TFW processing hubs.</p>
+      <a href="index-map.html">Open Map</a>
+    </div>
+    <div class="card">
+      <div class="icon">&#128200;</div>
+      <h2>Unit Economics Model</h2>
+      <p>Live cost-to-revenue model with 9 adjustable sliders, real-time KPIs, sensitivity charts, and automated viability verdict.</p>
+      <a href="economics.html">Open Model</a>
+    </div>
+    <div class="card">
+      <div class="icon">&#128269;</div>
+      <h2>Traceability Dashboard</h2>
+      <p>End-to-end batch tracking with processing timelines, CPCB EPR integration, and quality grading.</p>
+      <a href="traceability.html">Open Dashboard</a>
+    </div>
+    <div class="card">
+      <div class="icon">&#127777;</div>
+      <h2>HVAC Savings Calculator</h2>
+      <p>Compare TFW vs. brick, AAC, and concrete across 5 Indian climate zones with cumulative savings projections.</p>
+      <a href="hvac.html">Open Calculator</a>
+    </div>
+  </div>
+  <div class="note">
+    <strong>Note:</strong> These are interactive demonstration dashboards built using NebulaCloud Studio. Data shown is illustrative and based on publicly available sources (CPCB, IS standards, IMD climate normals). <a href="https://github.com/studio-public-demos/circato-ocean-plastic-tfw-dashboard">View showcase repository</a>
+  </div>
+</div>
+<footer>
+  <a href="https://nebulacloud.studio">Built with NebulaCloud Studio</a>
+</footer>
+</body>
+</html>

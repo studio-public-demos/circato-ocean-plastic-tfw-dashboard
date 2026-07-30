@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Circato — Batch Traceability Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="data/trace-data.js"></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: system-ui, -apple-system, sans-serif; background: #f1f5f9; color: #1e293b; min-height: 100vh; }
+.header { background: linear-gradient(135deg, #0f172a, #1e3a5f); color: white; padding: 20px 16px; text-align: center; }
+.header h1 { font-size: 20px; margin-bottom: 4px; }
+.header p { font-size: 13px; opacity: 0.8; }
+.container { max-width: 1200px; margin: 0 auto; padding: 16px; }
+.kpi-strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 16px; }
+.kpi-card { background: white; border-radius: 10px; padding: 14px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); text-align: center; }
+.kpi-card .val { font-size: 26px; font-weight: 800; color: #1e40af; }
+.kpi-card .lbl { font-size: 11px; color: #64748b; margin-top: 4px; }
+.chain-flow { background: white; border-radius: 10px; padding: 16px; margin-bottom: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+.chain-flow h2 { font-size: 15px; margin-bottom: 12px; color: #0f172a; }
+.flow-steps { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+.flow-step { flex: 1; min-width: 80px; text-align: center; padding: 10px 6px; background: #eff6ff; border-radius: 8px; border: 2px solid #bfdbfe; font-size: 11px; font-weight: 600; color: #1e40af; }
+.flow-arrow { font-size: 18px; color: #94a3b8; flex-shrink: 0; }
+.flow-step.active { background: #dcfce7; border-color: #86efac; color: #166534; }
+.batch-list { background: white; border-radius: 10px; padding: 16px; margin-bottom: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+.batch-list h2 { font-size: 15px; margin-bottom: 12px; color: #0f172a; }
+.batch-table { width: 100%; font-size: 11px; border-collapse: collapse; overflow-x: auto; display: block; }
+.batch-table thead { background: #f8fafc; }
+.batch-table th { padding: 8px 10px; text-align: left; font-weight: 600; color: #475569; white-space: nowrap; }
+.batch-table td { padding: 7px 10px; border-bottom: 1px solid #e2e8f0; white-space: nowrap; }
+.batch-table tr { cursor: pointer; }
+.batch-table tr:hover { background: #f0fdf4; }
+.batch-table .grade-A { color: #16a34a; font-weight: 700; }
+.batch-table .grade-B { color: #eab308; font-weight: 700; }
+.batch-table .grade-C { color: #dc2626; font-weight: 700; }
+.detail-panel { background: white; border-radius: 10px; padding: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); margin-bottom: 16px; display: none; }
+.detail-panel.show { display: block; }
+.detail-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+.detail-item { padding: 8px; background: #f8fafc; border-radius: 6px; }
+.detail-item .key { font-size: 10px; color: #94a3b8; text-transform: uppercase; }
+.detail-item .value { font-size: 13px; font-weight: 600; color: #1e293b; margin-top: 2px; }
+.timeline { position: relative; padding-left: 24px; }
+.timeline::before { content: ''; position: absolute; left: 8px; top: 0; bottom: 0; width: 2px; background: #e2e8f0; }
+.timeline-item { position: relative; margin-bottom: 12px; font-size: 12px; }
+.timeline-item::before { content: ''; position: absolute; left: -20px; top: 4px; width: 10px; height: 10px; border-radius: 50%; background: #3b82f6; border: 2px solid white; box-shadow: 0 0 0 2px #3b82f6; }
+.timeline-item .date { color: #94a3b8; font-size: 10px; }
+.charts-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.chart-card { background: white; border-radius: 10px; padding: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+.chart-card h2 { font-size: 15px; margin-bottom: 12px; color: #0f172a; }
+.chart-card canvas { max-height: 220px; }
+@media (max-width: 768px) {
+  .charts-row { grid-template-columns: 1fr; }
+  .flow-steps { flex-direction: column; }
+  .flow-arrow { transform: rotate(90deg); }
+}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>Circato Batch Traceability System</h1>
+  <p>End-to-end tracking: Collection → Segregation → Processing → TFW Panel → Construction Site · Integrated with CPCB EPR</p>
+</div>
+<div class="container">
+  <div class="kpi-strip" id="kpiStrip"></div>
+
+  <div class="chain-flow">
+    <h2>Value Chain Flow</h2>
+    <div class="flow-steps">
+      <div class="flow-step">Collection</div><div class="flow-arrow">→</div>
+      <div class="flow-step">Segregation</div><div class="flow-arrow">→</div>
+      <div class="flow-step">Shredding</div><div class="flow-arrow">→</div>
+      <div class="flow-step">Extrusion</div><div class="flow-arrow">→</div>
+      <div class="flow-step">ThermoFusion</div><div class="flow-arrow">→</div>
+      <div class="flow-step">Certification</div><div class="flow-arrow">→</div>
+      <div class="flow-step">Construction Site</div>
+    </div>
+  </div>
+
+  <div class="detail-panel" id="detailPanel">
+    <h2 style="font-size:15px;margin-bottom:12px;color:#0f172a;">Batch Detail: <span id="detailBatchId" style="color:#1e40af;">--</span></h2>
+    <div class="detail-grid" id="detailGrid"></div>
+    <h3 style="font-size:13px;margin-top:14px;margin-bottom:8px;color:#475569;">Processing Timeline</h3>
+    <div class="timeline" id="detailTimeline"></div>
+  </div>
+
+  <div class="charts-row">
+    <div class="chart-card"><h2>Waste Source Distribution</h2><canvas id="sourceChart"></canvas></div>
+    <div class="chart-card"><h2>Monthly Throughput</h2><canvas id="throughputChart"></canvas></div>
+  </div>
+
+  <div class="batch-list">
+    <h2>Traceable Batches</h2>
+    <div style="overflow-x:auto;">
+      <table class="batch-table">
+        <thead>
+          <tr>
+            <th>Batch ID</th><th>Source</th><th>Type</th>
+            <th>Weight (kg)</th><th>Panels</th><th>Grade</th>
+            <th>Site</th><th>EPR Filing</th>
+          </tr>
+        </thead>
+        <tbody id="batchTableBody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<footer style="text-align:center;padding:12px;margin-top:20px;opacity:0.5;font-size:11px;font-family:system-ui;color:#666;">Built with NebulaCloud Studio</footer>
+<script>
+// KPI strip
+document.getElementById('kpiStrip').innerHTML = `
+  <div class="kpi-card"><div class="val">${totalWeight.toLocaleString()} kg</div><div class="lbl">Total Waste Processed</div></div>
+  <div class="kpi-card"><div class="val">${totalPanels}</div><div class="lbl">TFW Panels Produced</div></div>
+  <div class="kpi-card"><div class="val">${totalCO2.toLocaleString()} kg</div><div class="lbl">CO₂ Offset</div></div>
+  <div class="kpi-card"><div class="val">${batchesCount}</div><div class="lbl">Traceable Batches</div></div>
+`;
+
+// Batch table
+const tbody = document.getElementById('batchTableBody');
+traceData.forEach((b, i) => {
+  const row = document.createElement('tr');
+  row.innerHTML = `
+    <td><strong>${b.batchId}</strong></td>
+    <td>${b.source}</td>
+    <td>${b.sourceType}</td>
+    <td>${b.weightKg.toLocaleString()}</td>
+    <td>${b.panelsProduced}</td>
+    <td class="grade-${b.qualityGrade}">${b.qualityGrade}</td>
+    <td>${b.constructionSite}</td>
+    <td>${b.epfFiling}</td>
+  `;
+  row.addEventListener('click', () => showDetail(b));
+  tbody.appendChild(row);
+});
+
+function showDetail(b) {
+  const panel = document.getElementById('detailPanel');
+  panel.classList.add('show');
+  document.getElementById('detailBatchId').textContent = b.batchId;
+
+  document.getElementById('detailGrid').innerHTML = `
+    <div class="detail-item"><div class="key">Source</div><div class="value">${b.source}</div></div>
+    <div class="detail-item"><div class="key">Waste Type</div><div class="value">${b.sourceType}</div></div>
+    <div class="detail-item"><div class="key">Plastic Type</div><div class="value">${b.plasticType}</div></div>
+    <div class="detail-item"><div class="key">Weight</div><div class="value">${b.weightKg.toLocaleString()} kg</div></div>
+    <div class="detail-item"><div class="key">Panels Produced</div><div class="value">${b.panelsProduced} panels</div></div>
+    <div class="detail-item"><div class="key">Panel Range</div><div class="value">${b.panelIdRange}</div></div>
+    <div class="detail-item"><div class="key">Quality Grade</div><div class="value grade-${b.qualityGrade}">${b.qualityGrade}</div></div>
+    <div class="detail-item"><div class="key">Construction Site</div><div class="value">${b.constructionSite}</div></div>
+    <div class="detail-item"><div class="key">Installer</div><div class="value">${b.installer}</div></div>
+    <div class="detail-item"><div class="key">EPR Filing</div><div class="value">${b.epfFiling}</div></div>
+    <div class="detail-item"><div class="key">Certified By</div><div class="value">${b.certifiedBy}</div></div>
+    <div class="detail-item"><div class="key">CO₂ Offset</div><div class="value">${b.co2OffsetKg.toLocaleString()} kg</div></div>
+  `;
+
+  document.getElementById('detailTimeline').innerHTML = `
+    <div class="timeline-item"><strong>Collected</strong><br><span class="date">${b.dateCollected}</span> — ${b.source}</div>
+    <div class="timeline-item"><strong>Segregated</strong><br><span class="date">${b.dateSegregated}</span> — ${b.segregationCenter}</div>
+    <div class="timeline-item"><strong>Shredded</strong><br><span class="date">${b.dateShredded}</span> — ${b.shreddingPlant}</div>
+    <div class="timeline-item"><strong>Extruded</strong><br><span class="date">${b.dateExtruded}</span> — Run ${b.extrusionRun}</div>
+    <div class="timeline-item"><strong>ThermoFused</strong><br><span class="date">${b.dateThermofused}</span> — Batch ${b.thermofusionBatch}</div>
+    <div class="timeline-item"><strong>Delivered to Site</strong><br><span class="date">${b.dateDelivered}</span> — ${b.constructionSite}</div>
+  `;
+
+  panel.scrollIntoView({ behavior: 'smooth' });
+}
+
+// Source chart
+const sourceTypes = ['Post-consumer MLP', 'Ocean-bound (coastal collection)', 'Ocean-bound (beach cleanup)'];
+const sourceData = sourceTypes.map(t => traceData.filter(b => b.sourceType === t).reduce((s, b) => s + b.weightKg, 0));
+new Chart(document.getElementById('sourceChart'), {
+  type: 'bar',
+  data: {
+    labels: sourceTypes,
+    datasets: [{
+      label: 'Weight (kg)',
+      data: sourceData,
+      backgroundColor: ['#3b82f6', '#06b6d4', '#14b8a6'],
+      borderRadius: 6
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: { legend: { display: false } }
+  }
+});
+
+// Throughput chart
+const months = ['Jan', 'Feb', 'Mar'];
+const monthData = months.map((m, i) => {
+  const idx = ['2026-01', '2026-02', '2026-03'];
+  return traceData.filter(b => b.dateCollected.startsWith(idx[i])).reduce((s, b) => s + b.weightKg, 0);
+});
+new Chart(document.getElementById('throughputChart'), {
+  type: 'line',
+  data: {
+    labels: months,
+    datasets: [
+      { label: 'Waste Collected (kg)', data: monthData, borderColor: '#3b82f6', backgroundColor: 'rgba(59,130,246,0.1)', fill: true, tension: 0.3, yAxisID: 'y' },
+      { label: 'Panels Produced', data: months.map((m, i) => {
+        const idx = ['2026-01', '2026-02', '2026-03'];
+        return traceData.filter(b => b.dateCollected.startsWith(idx[i])).reduce((s, b) => s + b.panelsProduced, 0);
+      }), borderColor: '#16a34a', backgroundColor: 'rgba(22,163,74,0.1)', fill: true, tension: 0.3, yAxisID: 'y1' }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      y: { position: 'left', title: { display: true, text: 'kg' } },
+      y1: { position: 'right', title: { display: true, text: 'Panels' }, grid: { drawOnChartArea: false } }
+    },
+    plugins: { legend: { position: 'bottom', labels: { font: { size: 10 } } } }
+  }
+});
+</script>
+</body>
+</html>

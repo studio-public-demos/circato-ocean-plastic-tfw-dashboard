@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Circato — Unit Economics Model: MLP Waste to TFW Panels</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: system-ui, -apple-system, sans-serif; background: #f1f5f9; color: #1e293b; min-height: 100vh; }
+.container { max-width: 1100px; margin: 0 auto; padding: 16px; }
+.header { background: linear-gradient(135deg, #0f172a, #1e3a5f); color: white; padding: 20px 16px; text-align: center; }
+.header h1 { font-size: 20px; margin-bottom: 4px; }
+.header p { font-size: 13px; opacity: 0.8; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+@media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }
+.card { background: white; border-radius: 10px; padding: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+.card h2 { font-size: 15px; color: #0f172a; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0; }
+.slider-group { margin-bottom: 14px; }
+.slider-group label { display: flex; justify-content: space-between; font-size: 12px; font-weight: 600; color: #475569; margin-bottom: 4px; }
+.slider-group input[type="range"] { width: 100%; accent-color: #3b82f6; }
+.slider-group .unit { font-size: 11px; color: #94a3b8; }
+.kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-top: 12px; }
+.kpi { text-align: center; padding: 10px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0; }
+.kpi .kpi-val { font-size: 22px; font-weight: 700; }
+.kpi .kpi-label { font-size: 10px; color: #64748b; margin-top: 2px; }
+.kpi.positive .kpi-val { color: #16a34a; }
+.kpi.negative .kpi-val { color: #dc2626; }
+.kpi.neutral .kpi-val { color: #1e40af; }
+.chart-container { position: relative; height: 250px; margin-top: 12px; }
+.breakdown-table { width: 100%; font-size: 12px; border-collapse: collapse; margin-top: 12px; }
+.breakdown-table td { padding: 5px 8px; border-bottom: 1px solid #e2e8f0; }
+.breakdown-table td:last-child { text-align: right; font-weight: 600; }
+.breakdown-table tr:last-child td { border-bottom: 2px solid #0f172a; font-weight: 700; font-size: 13px; }
+.summary-box { background: linear-gradient(135deg, #ecfdf5, #d1fae5); border: 1px solid #6ee7b7; border-radius: 10px; padding: 14px; margin-top: 12px; text-align: center; }
+.summary-box .big-num { font-size: 28px; font-weight: 800; color: #065f46; }
+.summary-box.danger { background: linear-gradient(135deg, #fef2f2, #fecaca); border-color: #fca5a5; }
+.summary-box.danger .big-num { color: #991b1b; }
+canvas { max-width: 100%; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>Unit Economics: MLP Waste to ThermoFused Wall Panels</h1>
+  <p>Interactive cost-to-revenue model — adjust sliders to stress-test viability</p>
+</div>
+<div class="container">
+<div class="grid">
+  <div class="card">
+    <h2>Cost Inputs (per tonne of MLP waste)</h2>
+    <div class="slider-group">
+      <label>Collection & Logistics <span id="valCollection">₹8,500</span></label>
+      <input type="range" id="sliderCollection" min="3000" max="15000" value="8500" step="100">
+      <div class="unit">Includes informal worker payments, transport to aggregation hub</div>
+    </div>
+    <div class="slider-group">
+      <label>Segregation & Sorting <span id="valSorting">₹2,200</span></label>
+      <input type="range" id="sliderSorting" min="1000" max="5000" value="2200" step="100">
+    </div>
+    <div class="slider-group">
+      <label>Shredding <span id="valShredding">₹1,500</span></label>
+      <input type="range" id="sliderShredding" min="500" max="3000" value="1500" step="100">
+    </div>
+    <div class="slider-group">
+      <label>Extrusion & ThermoFusion <span id="valProcessing">₹6,000</span></label>
+      <input type="range" id="sliderProcessing" min="3000" max="12000" value="6000" step="100">
+      <div class="unit">Energy, labor, machine amortization</div>
+    </div>
+    <div class="slider-group">
+      <label>Quality Testing & Certification <span id="valTesting">₹800</span></label>
+      <input type="range" id="sliderTesting" min="200" max="3000" value="800" step="100">
+      <div class="unit">CIPET / NABL lab testing per batch</div>
+    </div>
+    <div class="slider-group">
+      <label>EPR Compliance & Traceability <span id="valEpr">₹400</span></label>
+      <input type="range" id="sliderEpr" min="100" max="2000" value="400" step="100">
+      <div class="unit">CPCB reporting, batch ID system</div>
+    </div>
+  </div>
+  <div class="card">
+    <h2>Revenue & Output Parameters</h2>
+    <div class="slider-group">
+      <label>TFW Panels per Tonne <span id="valYield">50</span> panels</label>
+      <input type="range" id="sliderYield" min="30" max="80" value="50" step="1">
+      <div class="unit">1 panel = 20kg MLP; standard size 2400×600×12mm</div>
+    </div>
+    <div class="slider-group">
+      <label>Selling Price per Panel <span id="valPrice">₹1,200</span></label>
+      <input type="range" id="sliderPrice" min="600" max="2500" value="1200" step="50">
+      <div class="unit">Wholesale price to construction partners</div>
+    </div>
+    <div class="slider-group">
+      <label>Monthly Processing Volume <span id="valVolume">85</span> tonnes</label>
+      <input type="range" id="sliderVolume" min="10" max="200" value="85" step="5">
+    </div>
+    <div class="kpi-row">
+      <div class="kpi neutral"><div class="kpi-val" id="kpiCost">--</div><div class="kpi-label">Total Cost/t</div></div>
+      <div class="kpi neutral"><div class="kpi-val" id="kpiRevenue">--</div><div class="kpi-label">Revenue/t</div></div>
+      <div class="kpi" id="kpiMarginBox"><div class="kpi-val" id="kpiMargin">--</div><div class="kpi-label">Margin/t</div></div>
+      <div class="kpi neutral"><div class="kpi-val" id="kpiAnnual">--</div><div class="kpi-label">Annual EBITDA</div></div>
+    </div>
+    <div class="summary-box" id="verdictBox">
+      <div style="font-size:13px;font-weight:600;margin-bottom:4px;" id="verdictLabel">UNIT ECONOMICS VERDICT</div>
+      <div class="big-num" id="verdictValue">--</div>
+      <div style="font-size:11px;margin-top:2px;opacity:0.7;" id="verdictDetail">--</div>
+    </div>
+  </div>
+</div>
+<div class="grid" style="grid-template-columns:1fr 1fr;">
+  <div class="card">
+    <h2>Cost Breakdown</h2>
+    <div class="chart-container"><canvas id="costChart"></canvas></div>
+  </div>
+  <div class="card">
+    <h2>Sensitivity: Margin vs. Volume</h2>
+    <div class="chart-container"><canvas id="sensitivityChart"></canvas></div>
+  </div>
+</div>
+<div class="card">
+  <h2>Cost-Revenue Breakdown (per tonne)</h2>
+  <table class="breakdown-table" id="breakdownTable"></table>
+</div>
+</div>
+<footer style="text-align:center;padding:12px;margin-top:20px;opacity:0.5;font-size:11px;font-family:system-ui;color:#666;">Built with NebulaCloud Studio</footer>
+<script>
+const sliders = ['Collection', 'Sorting', 'Shredding', 'Processing', 'Testing', 'Epr', 'Yield', 'Price', 'Volume'];
+const els = {};
+sliders.forEach(s => {
+  els[s] = document.getElementById('slider' + s);
+  els['val' + s] = document.getElementById('val' + s);
+});
+
+let costChart, sensitivityChart;
+
+function fmtINR(n) { return '₹' + Math.round(n).toLocaleString('en-IN'); }
+
+function update() {
+  const collection = +els.Collection.value;
+  const sorting = +els.Sorting.value;
+  const shredding = +els.Shredding.value;
+  const processing = +els.Processing.value;
+  const testing = +els.Testing.value;
+  const epr = +els.Epr.value;
+  const yieldPanels = +els.Yield.value;
+  const pricePerPanel = +els.Price.value;
+  const volume = +els.Volume.value;
+
+  const totalCostPerTonne = collection + sorting + shredding + processing + testing + epr;
+  const revenuePerTonne = yieldPanels * pricePerPanel;
+  const marginPerTonne = revenuePerTonne - totalCostPerTonne;
+  const marginPct = (marginPerTonne / revenuePerTonne * 100);
+  const annualEBITDA = marginPerTonne * volume * 12;
+
+  document.getElementById('valCollection').textContent = fmtINR(collection);
+  document.getElementById('valSorting').textContent = fmtINR(sorting);
+  document.getElementById('valShredding').textContent = fmtINR(shredding);
+  document.getElementById('valProcessing').textContent = fmtINR(processing);
+  document.getElementById('valTesting').textContent = fmtINR(testing);
+  document.getElementById('valEpr').textContent = fmtINR(epr);
+  document.getElementById('valYield').textContent = yieldPanels;
+  document.getElementById('valPrice').textContent = fmtINR(pricePerPanel);
+  document.getElementById('valVolume').textContent = volume;
+
+  document.getElementById('kpiCost').textContent = fmtINR(totalCostPerTonne);
+  document.getElementById('kpiRevenue').textContent = fmtINR(revenuePerTonne);
+  document.getElementById('kpiMargin').textContent = fmtINR(marginPerTonne) + ' (' + marginPct.toFixed(1) + '%)';
+  document.getElementById('kpiAnnual').textContent = fmtINR(annualEBITDA);
+
+  const marginBox = document.getElementById('kpiMarginBox');
+  marginBox.className = 'kpi ' + (marginPerTonne > 0 ? 'positive' : 'negative');
+
+  const verdictBox = document.getElementById('verdictBox');
+  const verdictVal = document.getElementById('verdictValue');
+  const verdictDetail = document.getElementById('verdictDetail');
+  if (marginPerTonne > 5000) {
+    verdictBox.className = 'summary-box';
+    verdictVal.textContent = 'STRONGLY VIABLE';
+    verdictDetail.textContent = 'Significant margin; model is commercially robust at current parameters';
+  } else if (marginPerTonne > 0) {
+    verdictBox.className = 'summary-box';
+    verdictVal.textContent = 'VIABLE';
+    verdictDetail.textContent = 'Positive unit economics; sustainable at scale with volume';
+  } else if (marginPerTonne > -3000) {
+    verdictBox.className = 'summary-box danger';
+    verdictVal.textContent = 'MARGINAL';
+    verdictDetail.textContent = 'Near break-even; needs volume, EPR credits, or price premium';
+  } else {
+    verdictBox.className = 'summary-box danger';
+    verdictVal.textContent = 'NOT VIABLE';
+    verdictDetail.textContent = 'Cost structure exceeds revenue; redesign collection or pricing';
+  }
+
+  // Update breakdown table
+  document.getElementById('breakdownTable').innerHTML = `
+    <tr><td>Collection & Logistics</td><td>${fmtINR(collection)}</td></tr>
+    <tr><td>Segregation & Sorting</td><td>${fmtINR(sorting)}</td></tr>
+    <tr><td>Shredding</td><td>${fmtINR(shredding)}</td></tr>
+    <tr><td>Extrusion & ThermoFusion</td><td>${fmtINR(processing)}</td></tr>
+    <tr><td>Quality Testing & Certification</td><td>${fmtINR(testing)}</td></tr>
+    <tr><td>EPR Compliance</td><td>${fmtINR(epr)}</td></tr>
+    <tr><td style="color:#16a34a;">Revenue (${yieldPanels} panels x ${fmtINR(pricePerPanel)})</td><td style="color:#16a34a;">+ ${fmtINR(revenuePerTonne)}</td></tr>
+    <tr><td style="font-size:14px;color:${marginPerTonne>0?'#16a34a':'#dc2626'};">Net Margin per Tonne</td><td style="font-size:14px;color:${marginPerTonne>0?'#16a34a':'#dc2626'};">${fmtINR(marginPerTonne)}</td></tr>
+    <tr><td>Annual Volume (${volume} t/mo x 12)</td><td>${volume * 12} tonnes</td></tr>
+    <tr><td style="font-size:15px;color:#1e40af;">Annual EBITDA (projected)</td><td style="font-size:15px;color:#1e40af;">${fmtINR(annualEBITDA)}</td></tr>
+  `;
+
+  updateCharts(collection, sorting, shredding, processing, testing, epr);
+}
+
+function updateCharts(collection, sorting, shredding, processing, testing, epr) {
+  const costCtx = document.getElementById('costChart');
+  if (costChart) costChart.destroy();
+  costChart = new Chart(costCtx, {
+    type: 'doughnut',
+    data: {
+      labels: ['Collection', 'Segregation', 'Shredding', 'ThermoFusion', 'Testing', 'EPR'],
+      datasets: [{
+        data: [collection, sorting, shredding, processing, testing, epr],
+        backgroundColor: ['#3b82f6','#8b5cf6','#ec4899','#f97316','#eab308','#22c55e'],
+        borderWidth: 2,
+        borderColor: '#fff'
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { position: 'bottom', labels: { font: { size: 10 }, padding: 10 } } }
+    }
+  });
+
+  const sensCtx = document.getElementById('sensitivityChart');
+  if (sensitivityChart) sensitivityChart.destroy();
+  const volumes = [10, 30, 50, 85, 120, 160, 200];
+  const basePrice = +els.Price.value;
+  const baseYield = +els.Yield.value;
+  const baseCost = collection + sorting + shredding + processing + testing + epr;
+  const margins85 = volumes.map(v => (baseYield * basePrice - baseCost) * v * 12);
+  const margins70 = volumes.map(v => (baseYield * basePrice * 0.7 - baseCost) * v * 12);
+
+  sensitivityChart = new Chart(sensCtx, {
+    type: 'line',
+    data: {
+      labels: volumes.map(v => v + ' t/mo'),
+      datasets: [
+        { label: 'Current Price', data: margins85, borderColor: '#16a34a', backgroundColor: 'rgba(22,163,74,0.1)', fill: true, tension: 0.3 },
+        { label: '30% Price Drop', data: margins70, borderColor: '#dc2626', backgroundColor: 'rgba(220,38,38,0.05)', fill: true, tension: 0.3, borderDash: [5,5] }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: { ticks: { callback: v => '₹' + (v/100000).toFixed(1) + 'L' } }
+      },
+      plugins: { legend: { position: 'bottom', labels: { font: { size: 10 } } } }
+    }
+  });
+}
+
+sliders.forEach(s => {
+  els[s].addEventListener('input', update);
+});
+
+update();
+</script>
+</body>
+</html>
