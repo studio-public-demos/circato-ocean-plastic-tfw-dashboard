@@ -77,17 +77,16 @@ The same workflow applies to municipal waste management proposals, climate actio
 ├── ATTRIBUTIONS.md
 └── assets/
     ├── screenshot.png
-    ├── social-preview.png
-    ├── demo-economics.png
-    ├── demo-traceability.png
-    └── demo-hvac.png
+    └── social-preview.png
 ```
+
+> Screenshots of the unit economics model, traceability dashboard, and HVAC calculator are excluded from this public showcase as they contain proprietary business data and client information. The hotspot map is shown as it displays publicly sourced data (CPCB, OpenStreetMap).
 
 ## Deployment
 
 The live interactive dashboards are deployed as part of the challenge submission package. The proprietary implementation — including source code, datasets, business logic, and deployment configuration — is maintained privately.
 
-The public demo showcases representative screenshots and documents the approach, capabilities, and technical methodology used to build the complete evidence package.
+The public demo showcases the coastal leakage hotspot map and documents the approach, capabilities, and technical methodology used to build the complete evidence package. Proprietary dashboards (unit economics model, traceability system, HVAC calculator) are excluded from public display.
 
 ## Attribution
 
