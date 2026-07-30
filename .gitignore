@@ -1,0 +1,7 @@
+# Showcase repository — no build artifacts
+node_modules/
+*.pyc
+__pycache__/
+.env
+*.zip
+*.tar.gz
