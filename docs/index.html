@@ -3,69 +3,114 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Circato TFW — Interactive Evidence Package</title>
+<meta name="robots" content="index, follow">
+<meta name="description" content="CIRCATO — Ocean-Bound Plastic to ThermoFused Wall Evidence Package. A NebulaCloud Studio case study in sustainability and circular-construction workflow.">
+<title>CIRCATO — Ocean-Bound MLP to ThermoFused Walls | NebulaCloud Studio Case Study</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: system-ui, -apple-system, sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; }
-.hero { background: linear-gradient(135deg, #0f172a 0%, #0ea5e9 50%, #059669 100%); padding: 36px 20px 48px; text-align: center; }
-.hero h1 { font-size: clamp(20px, 4vw, 32px); font-weight: 800; color: white; margin-bottom: 6px; }
-.hero p { font-size: 14px; opacity: 0.9; }
-.container { max-width: 900px; margin: -16px auto 0; padding: 0 16px 40px; position: relative; z-index: 1; }
-.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
-.card { background: #1e293b; border: 1px solid #334155; border-radius: 10px; padding: 18px; transition: transform 0.15s; }
-.card:hover { transform: translateY(-2px); }
-.card .icon { font-size: 32px; margin-bottom: 8px; }
-.card h2 { font-size: 15px; color: #e2e8f0; margin-bottom: 6px; }
-.card p { font-size: 12px; color: #94a3b8; line-height: 1.5; margin-bottom: 12px; }
-.card a { display: inline-block; padding: 7px 16px; background: #3b82f6; color: white; text-decoration: none; border-radius: 5px; font-size: 12px; font-weight: 600; }
-.card:nth-child(1) a { background: #3b82f6; }
-.card:nth-child(2) a { background: #8b5cf6; }
-.card:nth-child(3) a { background: #06b6d4; }
-.card:nth-child(4) a { background: #059669; }
-.note { background: #1e293b; border: 1px solid #334155; border-radius: 8px; padding: 12px; margin-top: 16px; font-size: 11px; color: #94a3b8; }
-.note a { color: #38bdf8; }
-footer { text-align: center; padding: 12px; font-size: 10px; color: #475569; }
+.hero { background: linear-gradient(135deg, #0f172a 0%, #0ea5e9 50%, #059669 100%); padding: 48px 20px 64px; text-align: center; }
+.hero h1 { font-size: clamp(22px, 4vw, 32px); font-weight: 800; color: white; margin-bottom: 8px; }
+.hero .sub { font-size: clamp(13px, 2vw, 16px); opacity: 0.9; margin-bottom: 20px; }
+.hero .badges { margin: 12px 0 20px; display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; }
+.hero .badge { display: inline-block; background: rgba(255,255,255,0.12); padding: 5px 14px; border-radius: 20px; font-size: 12px; color: white; }
+.container { max-width: 880px; margin: -20px auto 0; padding: 0 20px 40px; position: relative; z-index: 1; }
+.access-notice { background: #1e293b; border: 1px solid #334155; border-left: 3px solid #f59e0b; border-radius: 8px; padding: 14px 18px; margin-bottom: 20px; font-size: 13px; color: #fbbf24; }
+.access-notice strong { color: #f59e0b; }
+.cta-row { display: flex; gap: 12px; flex-wrap: wrap; margin: 16px 0; justify-content: center; }
+.btn { display: inline-block; padding: 10px 22px; border-radius: 6px; font-size: 13px; font-weight: 600; text-decoration: none; transition: background 0.15s; }
+.btn-primary { background: #059669; color: white; }
+.btn-primary:hover { background: #047857; }
+.btn-secondary { background: #1e293b; border: 1px solid #334155; color: #e2e8f0; }
+.btn-secondary:hover { background: #334155; }
+.capabilities { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-bottom: 24px; }
+.cap-card { background: #1e293b; border: 1px solid #334155; border-radius: 10px; padding: 20px; }
+.cap-card h3 { font-size: 14px; color: #e2e8f0; margin-bottom: 6px; }
+.cap-card p { font-size: 12px; color: #94a3b8; line-height: 1.5; }
+.disclaimer { background: #451a03; border: 1px solid #78350f; border-radius: 10px; padding: 18px; margin: 24px 0; font-size: 11px; color: #fdba74; line-height: 1.6; }
+.disclaimer strong { color: #fbbf24; }
+.request-section { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 24px; text-align: center; margin: 24px 0; }
+.request-section h2 { font-size: 18px; color: white; margin-bottom: 8px; }
+.request-section p { font-size: 13px; color: #94a3b8; margin-bottom: 16px; line-height: 1.6; }
+.screenshots { margin: 24px 0; }
+.screenshots h2 { font-size: 15px; color: #e2e8f0; margin-bottom: 12px; }
+.screenshot-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
+.screenshot-grid img { width: 100%; border-radius: 8px; border: 1px solid #334155; }
+footer { text-align: center; padding: 16px; font-size: 10px; color: #475569; border-top: 1px solid #1e293b; }
 footer a { color: #3b82f6; text-decoration: none; }
+@media (max-width: 480px) {
+  .hero { padding: 32px 14px 48px; }
+  .btn { padding: 8px 16px; font-size: 12px; }
+}
 </style>
 </head>
 <body>
 <div class="hero">
-  <h1>Circato — Interactive Evidence Package</h1>
-  <p>Ocean-Bound MLP Waste to ThermoFused Walls | Built with NebulaCloud Studio</p>
+  <h1>CIRCATO — Ocean-Bound Plastic to ThermoFused Wall Evidence Package</h1>
+  <div class="sub">A multidisciplinary digital demonstrator created using NebulaCloud Studio</div>
+  <div class="badges">
+    <span class="badge">Geospatial Analysis</span>
+    <span class="badge">Commercial Modelling</span>
+    <span class="badge">Material Traceability</span>
+    <span class="badge">Thermal Performance</span>
+    <span class="badge">Evidence Generation</span>
+  </div>
 </div>
+
 <div class="container">
-  <div class="grid">
-    <div class="card">
-      <div class="icon">&#127758;</div>
-      <h2>Coastal Leakage Hotspot Map</h2>
-      <p>Interactive map of 36 Indian districts with leakage risk tiers, state boundaries, river systems, and TFW processing hubs.</p>
-      <a href="index-map.html">Open Map</a>
+  <div class="access-notice">
+    <strong>Private interactive demo</strong> — access available upon request. The complete interactive demonstrator is maintained privately by NebulaCloud Studio and is no longer publicly accessible.
+  </div>
+
+  <div class="capabilities">
+    <div class="cap-card">
+      <h3>Coastal Leakage Hotspot Analysis</h3>
+      <p>Interactive geospatial mapping of 36 Indian coastal and river-linked districts with quantified plastic leakage risk tiers, state boundaries, and 14 major river systems.</p>
     </div>
-    <div class="card">
-      <div class="icon">&#128200;</div>
-      <h2>Unit Economics Model</h2>
-      <p>Live cost-to-revenue model with 9 adjustable sliders, real-time KPIs, sensitivity charts, and automated viability verdict.</p>
-      <a href="economics.html">Open Model</a>
+    <div class="cap-card">
+      <h3>Unit Economics Modelling</h3>
+      <p>Live cost-to-revenue model with adjustable parameters, sensitivity analysis, and automated viability assessment for MLP-to-TFW conversion.</p>
     </div>
-    <div class="card">
-      <div class="icon">&#128269;</div>
-      <h2>Traceability Dashboard</h2>
-      <p>End-to-end batch tracking with processing timelines, CPCB EPR integration, and quality grading.</p>
-      <a href="traceability.html">Open Dashboard</a>
+    <div class="cap-card">
+      <h3>Batch Traceability & EPR Workflow</h3>
+      <p>End-to-end batch tracking from waste collection through processing to construction delivery, demonstrating EPR-compatible architecture.</p>
     </div>
-    <div class="card">
-      <div class="icon">&#127777;</div>
-      <h2>HVAC Savings Calculator</h2>
-      <p>Compare TFW vs. brick, AAC, and concrete across 5 Indian climate zones with cumulative savings projections.</p>
-      <a href="hvac.html">Open Calculator</a>
+    <div class="cap-card">
+      <h3>HVAC & Thermal Performance</h3>
+      <p>Comparative thermal performance calculator comparing TFW panels against clay brick, AAC block, and concrete across five Indian climate zones.</p>
     </div>
   </div>
-  <div class="note">
-    <strong>Note:</strong> These are interactive demonstration dashboards built using NebulaCloud Studio. Data shown is illustrative and based on publicly available sources (CPCB, IS standards, IMD climate normals). <a href="https://github.com/studio-public-demos/circato-ocean-plastic-tfw-dashboard">View showcase repository</a>
+
+  <div class="request-section">
+    <h2>Request access to the interactive demonstrator</h2>
+    <p>The complete interactive demonstrator is available for controlled evaluation. Access may be provided to prospective customers, technical partners, investors, programme evaluators, and other qualified stakeholders.</p>
+    <div class="cta-row">
+      <a href="mailto:contact@nebulacloud.studio?subject=Request%20for%20CIRCATO%20Interactive%20Demo%20Access" class="btn btn-primary">Request Demo Access</a>
+      <a href="https://nebulacloud.studio" class="btn btn-secondary">Explore NebulaCloud Studio</a>
+    </div>
   </div>
+
+  <div class="screenshots">
+    <h2>Project Screenshots</h2>
+    <div class="screenshot-grid">
+      <img src="../assets/screenshot.png" alt="Coastal Leakage Hotspot Map" loading="lazy">
+      <img src="../assets/social-preview.png" alt="Project Overview" loading="lazy">
+    </div>
+  </div>
+
+  <div class="disclaimer">
+    <strong>Independent technology demonstrator.</strong> This is an independent technology demonstrator created by NebulaCloud Studio using publicly available information and representative assumptions. It is not an official CIRCATO or Unified Intelligence application and does not imply endorsement, partnership, certification, or validation by the respective organisation. Product names and trademarks remain the property of their respective owners.<br><br>
+    The public case study is provided for demonstration purposes only. The complete interactive models, implementation, datasets, reports, and project workflows are not publicly distributed. Publicly displayed materials may be viewed for evaluation and informational purposes. No permission is granted to reuse, reproduce, commercialize, redistribute, or create derivative works from NebulaCloud-created showcase content except where separately permitted by an applicable third-party licence.
+  </div>
+
+  <p style="text-align:center;font-size:12px;color:#64748b;margin-top:16px;">
+    This project demonstrates how NebulaCloud Studio can transform a complex industrial or sustainability concept into a working digital evidence package spanning research, modelling, geospatial analysis, application development, documentation, and verification.
+  </p>
 </div>
+
 <footer>
-  <a href="https://nebulacloud.studio">Built with NebulaCloud Studio</a>
+  <a href="https://nebulacloud.studio">Built with NebulaCloud Studio</a> &middot;
+  <a href="https://github.com/studio-public-demos/circato-ocean-plastic-tfw-dashboard">View on GitHub</a>
 </footer>
 </body>
 </html>

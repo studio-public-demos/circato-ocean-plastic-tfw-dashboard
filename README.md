@@ -4,9 +4,11 @@ An interactive evidence package for high-value, high-volume repurposing of ocean
 
 > This repository is a public project showcase. The application's proprietary source code, internal workflows, business data, and deployment configuration are not included.
 
+> **Independent technology demonstrator.** This is an independent technology demonstrator created by NebulaCloud Studio using publicly available information and representative assumptions. It is not an official CIRCATO application and does not imply endorsement, partnership, or certification by the respective organisation. Product names and trademarks remain the property of their respective owners.
+
 [![Circato — Ocean-Bound MLP to ThermoFused Walls](assets/social-preview.png)](https://studio-public-demos.github.io/circato-ocean-plastic-tfw-dashboard/)
 
-**[▶ Open Live Demo](https://studio-public-demos.github.io/circato-ocean-plastic-tfw-dashboard/)**
+> **Private interactive demo** — access available upon request. The complete interactive demonstrator is maintained privately by NebulaCloud Studio.
 
 ## Overview
 
@@ -84,11 +86,15 @@ The same workflow applies to municipal waste management proposals, climate actio
 
 > Screenshots of the unit economics model, traceability dashboard, and HVAC calculator are excluded from this public showcase as they contain proprietary business data and client information. The hotspot map is shown as it displays publicly sourced data (CPCB, OpenStreetMap).
 
-## Deployment
+## Interactive Demonstrator Access
 
-The live interactive dashboards are deployed as part of the challenge submission package. The proprietary implementation — including source code, datasets, business logic, and deployment configuration — is maintained privately.
+The complete interactive demonstrator is maintained privately by NebulaCloud Studio.
 
-The public demo showcases the coastal leakage hotspot map and documents the approach, capabilities, and technical methodology used to build the complete evidence package. Proprietary dashboards (unit economics model, traceability system, HVAC calculator) are excluded from public display.
+Access may be provided upon request for qualified evaluation, partnership, customer, investment, or programme-review discussions.
+
+To request access, contact: **contact@nebulacloud.studio** with subject "Request for CIRCATO Interactive Demo Access".
+
+The public case study page at [studio-public-demos.github.io/circato-ocean-plastic-tfw-dashboard](https://studio-public-demos.github.io/circato-ocean-plastic-tfw-dashboard/) provides a static overview with project screenshots and capability descriptions. No functional dashboards, datasets, or application logic are publicly accessible.
 
 ## Attribution
 
@@ -114,7 +120,7 @@ NebulaCloud Studio helps domain professionals turn ideas, models, datasets, and 
 
 Working with sustainability proposals, waste management data, or circular economy workflows?
 
-Explore the [live interactive demo](https://studio-public-demos.github.io/circato-ocean-plastic-tfw-dashboard/) and see how your technical workflow could be transformed into an interactive, evaluator-ready application.
+This case study demonstrates how NebulaCloud Studio transforms complex domain concepts into working digital evidence packages. Contact us to discuss your workflow.
 
 **[Explore NebulaCloud Studio](https://nebulacloud.studio)**
 
