@@ -1,13 +1,43 @@
-MIT License
+# Showcase Materials Licence
 
-Copyright (c) 2026 NebulaCloud Studio
+Copyright (c) 2026 NebulaCloud Studio. All rights reserved.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of the materials in this public showcase repository (the "Showcase Materials"), to deal in the Showcase Materials without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Showcase Materials, and to permit persons to whom the Showcase Materials are furnished to do so, subject to the following conditions:
+## Showcase Viewing and Evaluation
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Showcase Materials.
+The materials in this public showcase repository (screenshots, documentation, static preview page, and associated metadata) are provided for **viewing and informational evaluation purposes only**.
 
-THE SHOWCASE MATERIALS ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SHOWCASE MATERIALS OR THE USE OR OTHER DEALINGS IN THE SHOWCASE MATERIALS.
+## No Grant of Rights
 
----
+No permission is granted to:
 
-This licence applies only to the materials contained in this public showcase repository. It does not grant rights to the underlying application source code, proprietary workflows, private datasets, hosted services, trademarks, or other materials not included in this repository.
+- Reproduce, copy, or redistribute the showcase materials
+- Create derivative works from the showcase content
+- Use the showcase materials for commercial purposes
+- Sublicense or transfer the showcase materials
+- Host, deploy, or operate the materials as a service
+- Represent the showcase as an official product of CIRCATO or any third party
+
+## Third-Party Components
+
+This repository references third-party libraries, datasets, and standards that are governed by their own licences:
+
+- **Leaflet.js** — BSD 2-Clause License
+- **Chart.js** — MIT License  
+- **CartoDB/OpenStreetMap** — ODbL
+- **India State Boundaries** — CC BY 2.5 IN (datameet/maps)
+- **CPCB data** — Government of India public domain
+- **IMD climate data** — Government of India public domain
+
+The licence terms above do not restrict any rights you may have under those third-party licences for the components they govern.
+
+## Interactive Demonstrator
+
+The complete interactive demonstrator is maintained privately by NebulaCloud Studio and is **not included** in this public repository. Access may be provided upon request for qualified evaluation.
+
+## Trademarks
+
+CIRCATO and related product names and marks are the property of their respective owners. This showcase does not imply endorsement, partnership, or certification.
+
+## Contact
+
+For access requests or licensing inquiries: contact@nebulacloud.studio
