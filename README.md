@@ -8,7 +8,7 @@ An interactive evidence package for high-value, high-volume repurposing of ocean
 
 [![Circato — Ocean-Bound MLP to ThermoFused Walls](assets/social-preview.png)](https://studio-public-demos.github.io/circato-ocean-plastic-tfw-dashboard/)
 
-> **Private interactive demo** — access available upon request. The complete interactive demonstrator is maintained privately by NebulaCloud Studio.
+**[▶ Open Live Demo](https://studio-public-demos.github.io/circato-ocean-plastic-tfw-dashboard/)**
 
 ## Overview
 
@@ -120,7 +120,7 @@ NebulaCloud Studio helps domain professionals turn ideas, models, datasets, and 
 
 Working with sustainability proposals, waste management data, or circular economy workflows?
 
-This case study demonstrates how NebulaCloud Studio transforms complex domain concepts into working digital evidence packages. Contact us to discuss your workflow.
+Explore the [live interactive demo](https://studio-public-demos.github.io/circato-ocean-plastic-tfw-dashboard/) to see how NebulaCloud Studio transforms complex domain concepts into working digital evidence packages.
 
 **[Explore NebulaCloud Studio](https://nebulacloud.studio)**
 
