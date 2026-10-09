@@ -1,132 +1,122 @@
-# Circato — Ocean-Bound MLP to ThermoFused Walls
+# CIRCATO — Ocean-Bound Plastic to ThermoFused Walls
 
-An interactive evidence package for high-value, high-volume repurposing of ocean-bound multi-layered plastic (MLP) waste into ThermoFused Wall (TFW) construction panels. Built for India's National Challenge on circular economy and plastic waste reduction. Created using NebulaCloud Studio.
+> **Notice**
+> This repository is a public project showcase created using NebulaCloud Studio.
+> The proprietary source code, implementation details, prompts, workflows, datasets, infrastructure, and deployment configuration are intentionally excluded from the intended showcase scope.
+>
+> **Current IP compliance exception:** the public `docs/` directory still hosts the interactive demonstration's browser code and scenario data. It must move to separately managed hosting before this repository can be described as showcase-only. Earlier Git history also contains implementation files. Keeping the existing demo available does not resolve that exposure.
 
-> This repository is a public project showcase. The application's proprietary source code, internal workflows, business data, and deployment configuration are not included.
+Independent technology demonstrator. No official CIRCATO application, endorsement, partnership, customer deployment, laboratory certification, or government integration is represented. All rights reserved; see [LICENSE](LICENSE).
 
-> **Independent technology demonstrator.** This is an independent technology demonstrator created by NebulaCloud Studio using publicly available information and representative assumptions. It is not an official CIRCATO application and does not imply endorsement, partnership, or certification by the respective organisation. Product names and trademarks remain the property of their respective owners.
-
-[![Circato — Ocean-Bound MLP to ThermoFused Walls](assets/social-preview.png)](https://studio-public-demos.github.io/circato-ocean-plastic-tfw-dashboard/)
-
-**[▶ Open Live Demo](https://studio-public-demos.github.io/circato-ocean-plastic-tfw-dashboard/)**
+![CIRCATO showcase](assets/social-preview.png)
 
 ## Overview
 
-India contributes an estimated 0.6 million tonnes of plastic leakage into oceans annually, with multi-layered plastic forming the largest unmanaged fraction. This project demonstrates how NebulaCloud Studio was used to build a complete, data-backed evidence package for a national challenge submission — transforming complex waste-to-value workflows into interactive, evaluator-ready dashboards.
+Explore how a circular-construction proposal can be presented through an interactive map, economic scenarios, synthetic batch records, and comparative thermal assumptions. This independent demonstration was created using NebulaCloud Studio.
 
-The package spans the full value chain: coastal leakage hotspot mapping, live unit economics modeling, batch-level traceability with EPR integration, and HVAC energy savings comparison. All four dashboards were generated, verified, and documented within a single Studio session.
+## Business Problem
 
-The project showcases Studio's capabilities for sustainability workflows: interactive geospatial mapping, economic modeling with sensitivity analysis, traceability systems, and comparative energy calculators — all delivered as browser-based, mobile-responsive applications.
+Circular-economy proposals need to communicate where interventions could occur, how cost assumptions affect viability, how materials could be tracked, and which building-performance questions need further investigation. Static narrative alone makes those assumptions difficult to explore.
 
-## What It Does
+## Solution Overview
 
-| Capability | Description |
+Four browser experiences make the proposal tangible: inspect a district scenario map, adjust cost and revenue assumptions, review synthetic material batches, and compare illustrative thermal scenarios. They support discussion and evaluation; their outputs do not establish commercial or environmental performance.
+
+## Live Demo
+
+**[Launch the existing live demo](https://studio-public-demos.github.io/circato-ocean-plastic-tfw-dashboard/)**
+
+- [Coastal scenario map](https://studio-public-demos.github.io/circato-ocean-plastic-tfw-dashboard/index-map.html)
+- [Unit economics](https://studio-public-demos.github.io/circato-ocean-plastic-tfw-dashboard/economics.html)
+- [Synthetic batch traceability](https://studio-public-demos.github.io/circato-ocean-plastic-tfw-dashboard/traceability.html)
+- [Illustrative HVAC comparison](https://studio-public-demos.github.io/circato-ocean-plastic-tfw-dashboard/hvac.html)
+
+The demonstration has no administrative interface or official filing connection. Do not enter private information. Its public browser implementation remains an IP policy exception pending hosting separation.
+
+## Demo Video
+
+[Watch the visual walkthrough](assets/videos/circato-walkthrough.mp4). This captioned, silent overview shows sanitized dashboard captures without source code or developer tools.
+
+## Project Screenshots
+
+![Coastal scenario map](assets/screenshots/hotspot-map.png)
+
+Map imagery © OpenStreetMap contributors; community boundaries credited in [ATTRIBUTIONS.md](ATTRIBUTIONS.md).
+
+![Unit economics scenario](assets/screenshots/economics.png)
+
+![Synthetic traceability records](assets/screenshots/traceability.png)
+
+![Illustrative thermal comparison](assets/screenshots/hvac.png)
+
+## Generated Outputs
+
+Representative displayed results, captured from the sanitized demo at its default settings:
+
+- [Unit economics result](assets/outputs/economics-sample.png)
+- [Synthetic batch detail and summaries](assets/outputs/traceability-sample.png)
+- [Thermal comparison result](assets/outputs/hvac-sample.png)
+
+These are output images, not reusable models or underlying datasets. No original submission PDF, Word report, or laboratory report is available for independent verification; none is represented as a delivered artifact here.
+
+## Key Features
+
+| Experience | What visitors can explore |
 |---|---|
-| Coastal Leakage Hotspot Map | Interactive Leaflet.js map of 36 Indian coastal and river-linked districts with color-coded leakage risk tiers, state boundaries, 14 major river systems, and 7 coastal belt regions overlaid with processing hub locations |
-| Unit Economics Live Model | 9-parameter adjustable cost-to-revenue model with real-time KPI updates, doughnut cost breakdown chart, sensitivity analysis, and automated viability verdict at default parameters |
-| Batch Traceability Dashboard | End-to-end tracking of 6 sample batches from waste source to construction site, with click-to-expand detail panels, processing timelines, and CPCB EPR filing integration |
-| HVAC Energy Savings Calculator | 6-parameter comparative thermal performance calculator comparing TFW panels against clay brick, AAC block, and concrete across 5 Indian climate zones with cumulative savings projections |
-| Compiled Evidence Report | Programmatically generated PDF report with 10 chart panels covering leakage analysis, unit economics, throughput projections, HVAC comparison, competitive radar, and supply chain ecosystem |
-| Comprehensive Submission Document | 17-section Word document generated via python-docx with embedded charts, data tables, methodology, budget, gap analysis, risk register, and dashboard screenshots |
-
-## Why It Matters
-
-Government challenge submissions, sustainability proposals, and circular economy initiatives increasingly require data-backed, verifiable evidence — not just narrative claims. Traditional static PDF proposals struggle to communicate dynamic models, interactive maps, and traceability workflows effectively.
-
-This project demonstrates how NebulaCloud Studio bridges that gap: transforming raw datasets and domain expertise into a complete interactive evidence package within hours. Evaluators receive not just a document, but live dashboards they can explore, stress-test, and verify independently.
-
-The same workflow applies to municipal waste management proposals, climate action planning, blue economy projects, green building certifications, and social impact assessments — any domain where interactive data exploration outperforms static reporting.
+| Map | Example district markers, risk colours, layer switches and community state boundaries |
+| Economics | Adjustable assumptions and responsive cost, revenue and sensitivity displays |
+| Traceability | Six synthetic batches, illustrative record fields and expandable processing detail |
+| Thermal comparison | Adjustable scenarios, material comparisons and cumulative projections |
 
 ## Intended Users
 
-| Audience | Relevant Application |
-|---|---|
-| Government challenge evaluators | Review interactive evidence alongside proposal document |
-| Sustainability consultants | Template for rapid proposal generation with live data |
-| Waste management organizations | Traceability dashboard for EPR compliance reporting |
-| Construction industry partners | HVAC savings calculator for green building proposals |
-| Policy analysts | Leakage hotspot maps for intervention targeting |
-| Civic-tech groups | Open framework for waste-to-value supply chain visualization |
+Sustainability proposal teams, programme evaluators, circular-economy planners, construction stakeholders, and organisations evaluating a similar interactive presentation.
 
-## Technical Highlights
+## Example Use Cases
 
-| Capability | Technology or Method |
-|---|---|
-| Interactive geospatial mapping | Leaflet.js with CARTO basemaps, multi-layer GeoJSON, circle markers with dynamic radius, layer toggle controls |
-| Live economic modeling | Client-side JavaScript with 9 interactive sliders, real-time KPI computation, doughnut + line chart rendering via Chart.js |
-| Batch traceability system | Structured dataset with 13-field batch records, click-to-expand detail panels, processing timeline visualization |
-| Thermal performance comparison | Steady-state heat transfer calculations using IS 3792:1978 methodology, IMD climate normals for 5 Indian zones, 6 adjustable parameters |
-| Document automation | Python (matplotlib for charts, python-docx for Word, Playwright for automated screenshots, reportlab/matplotlib for PDF) |
-| Responsive design | CSS Grid and Flexbox layouts adapting to 320px through 1280px viewports, touch-compatible controls |
-| Chart generation | matplotlib with custom styling for 7 chart types: bar, horizontal bar, doughnut, line, radar, waterfall, and Sankey-style diagrams |
-| Mobile compatibility | All dashboards tested at 375px, 768px, and 1280px viewports with no horizontal overflow at 320px |
+- Discuss potential collection and processing locations using an illustrative map.
+- Explore how changing cost assumptions affects a proposal's economic scenario.
+- Demonstrate a possible material-tracking user experience with synthetic records.
+- Identify thermal-performance assumptions that require independent testing.
 
-## Technical Scope and Limitations
+## Technical Highlights (High-Level Only)
 
-- The coastal leakage model uses the Jambeck et al. (2015) mismanaged waste fraction methodology calibrated with CPCB data — it is an estimation model, not a real-time measurement system.
-- Unit economics are modeled with adjustable parameters representing typical Indian waste-sector costs; actual costs vary by geography, season, and feedstock quality.
-- The HVAC calculator uses steady-state heat transfer per IS 3792:1978 with IMD climate normals (1991–2020). It is a comparative planning tool, not a certified energy simulation.
-- The traceability dashboard uses sample batch data representative of actual operations. It demonstrates the system architecture and EPR integration pattern, not live production data.
-- All dashboards are browser-based and self-contained. They require no server-side infrastructure but also do not persist data across sessions in the demo state.
-- TFW panel thermal properties (U-value 0.38 W/m²·K, embodied carbon 45 kgCO₂/m²) are based on CIPET batch test results and should be independently verified for specific production runs.
-- This project is an evidence package for a specific challenge submission. The dashboards are configured for the Indian waste-sector context and would require reparameterization for other geographies or waste streams.
+Browser-based interactive mapping, adjustable scenario models, chart-based summaries, expandable sample records, and responsive presentation. External map and chart resources are identified in the attribution document. No internal APIs, platform internals, service topology, schemas, prompts or orchestration are described.
 
-## Showcase Contents
+## Architecture Overview (Conceptual Only)
 
-```text
-/
-├── README.md
-├── LICENSE
-├── .gitignore
-├── ATTRIBUTIONS.md
-└── assets/
-    ├── screenshot.png
-    └── social-preview.png
-```
+![Conceptual evaluation journey](assets/diagrams/conceptual-overview.svg)
 
-> Screenshots of the unit economics model, traceability dashboard, and HVAC calculator are excluded from this public showcase as they contain proprietary business data and client information. The hotspot map is shown as it displays publicly sourced data (CPCB, OpenStreetMap).
+Visitors explore example context, compare scenarios, and review visible outcomes. This user journey describes the experience rather than the implementation.
 
-## Interactive Demonstrator Access
+## Technical Scope & Limitations
 
-The complete interactive demonstrator is maintained privately by NebulaCloud Studio.
+- District values and batch records are synthetic examples regenerated for this public demo. Model assumptions are illustrative and have not been independently validated.
+- Traceability records are synthetic, with generic sites, installers, and demonstration identifiers. They are not customer records, certificates, or submitted EPR filings.
+- No official CPCB integration, certified TFW properties, BIS compliance, measured emissions reduction, commercial viability or realised energy saving is claimed.
+- The thermal comparison is a simplified planning illustration, not a certified building-energy simulation. Material and climate inputs require independent validation.
+- External basemap tiles, boundaries and chart libraries require network access; availability and upstream changes may affect the experience.
+- This demonstration does not provide production persistence, authentication, customer administration, or regulated compliance services.
+- Removing files from the current branch would not remove previous public history, clones, caches or historical licence grants. Full IP remediation requires a hosting migration and a separate historical-exposure review.
 
-Access may be provided upon request for qualified evaluation, partnership, customer, investment, or programme-review discussions.
+## Performance Summary (Verified Only)
 
-To request access, contact: **contact@nebulacloud.studio** with subject "Request for CIRCATO Interactive Demo Access".
-
-The public case study page at [studio-public-demos.github.io/circato-ocean-plastic-tfw-dashboard](https://studio-public-demos.github.io/circato-ocean-plastic-tfw-dashboard/) provides a static overview with project screenshots and capability descriptions. No functional dashboards, datasets, or application logic are publicly accessible.
+Validation performed on 9 October 2026 checks the five demo pages at 320, 375, 768 and 1440 pixel viewport widths and exercises map toggles, model inputs and batch expansion. The accompanying compliance report records actual results and any failures. No throughput, build-time, scientific accuracy, production reliability, or financial performance benchmark is asserted.
 
 ## Attribution
 
-The following external resources are used in the dashboards and are subject to their respective licenses:
-
-- **Leaflet.js** — BSD 2-Clause License. © Vladimir Agafonkin and contributors.
-- **Chart.js** — MIT License. © Chart.js contributors.
-- **CartoDB Basemaps** — © CartoDB, OpenStreetMap contributors (ODbL).
-- **India State Boundaries GeoJSON** — datameet/maps repository (CC BY 2.5 IN).
-- **Jambeck et al. (2015)** — "Plastic waste inputs from land into the ocean." Science 347(6223), 768–771.
-- **CPCB Annual Reports (2023–24)** — Central Pollution Control Board, Government of India. Public domain government data.
-- **IMD Climate Normals (1991–2020)** — India Meteorological Department. Public domain government data.
-
-See [ATTRIBUTIONS.md](ATTRIBUTIONS.md) for complete attribution details.
+See [ATTRIBUTIONS.md](ATTRIBUTIONS.md) for map imagery, boundary sources, third-party libraries and provenance limitations. The [showcase licence](LICENSE) covers original presentation materials only; third-party rights and trademarks remain with their owners.
 
 ## Built with NebulaCloud Studio
 
-This project was created using [NebulaCloud Studio](https://nebulacloud.studio), an agentic application-building platform for engineering, scientific, geospatial, and interactive digital workflows.
+Created using [NebulaCloud Studio](https://nebulacloud.studio). Explore the [central showcase catalogue](https://studio-public-demos.github.io/) and [project collection](https://github.com/studio-public-demos) for further examples.
 
-NebulaCloud Studio helps domain professionals turn ideas, models, datasets, and algorithms into usable, deployable applications — from interactive maps and dashboards to compiled documents and automated verification pipelines.
+## Related Project Showcases
 
-## Build Your Own Interactive Application
+- [Guntur Change Detection Dashboard](https://github.com/studio-public-demos/guntur-change-detection-dashboard)
+- [VLM Aerodynamics Demo](https://github.com/studio-public-demos/vlm-aerodynamics-demo)
+- [Stadium Digital Twin](https://github.com/studio-public-demos/stadium-digital-twin)
 
-Working with sustainability proposals, waste management data, or circular economy workflows?
+## Call to Action
 
-Explore the [live interactive demo](https://studio-public-demos.github.io/circato-ocean-plastic-tfw-dashboard/) to see how NebulaCloud Studio transforms complex domain concepts into working digital evidence packages.
-
-**[Explore NebulaCloud Studio](https://nebulacloud.studio)**
-
-## Related Demos
-
-- [Guntur Change Detection Dashboard](https://github.com/studio-public-demos/guntur-change-detection-dashboard) — Interactive geospatial dashboard for building-level change detection
-- [VLM Aerodynamics Demo](https://github.com/studio-public-demos/vlm-aerodynamics-demo) — Interactive 3D wing simulator with real-time aerodynamics
-- [Stadium Digital Twin](https://github.com/studio-public-demos/stadium-digital-twin) — Interactive 3D stadium dashboard with live sensor simulation
-- [3D GIS Globe](https://github.com/studio-public-demos/3d-gis-globe) — Interactive 3D GIS globe with live earthquake data
+[Explore the live demo](https://studio-public-demos.github.io/circato-ocean-plastic-tfw-dashboard/) or [visit NebulaCloud Studio](https://nebulacloud.studio) to discuss a similar solution. For evaluation and licensing enquiries, [contact NebulaCloud Studio](mailto:contact@nebulacloud.studio).

@@ -1,44 +1,38 @@
 # Attributions
 
-This document identifies publicly displayed external resources used in the Circato TFW dashboard showcase. Attribution is provided as required by each resource's license.
+## Showcase materials
 
-## JavaScript Libraries (Loaded via CDN)
+Screenshots and the walkthrough show the independent NebulaCloud Studio
+demonstrator, with regenerated synthetic district values, generic synthetic traceability records and illustrative model inputs.
+Output images are captures of displayed results, not underlying datasets.
+Original presentation artwork and the conceptual diagram: NebulaCloud Studio.
+CIRCATO and other names remain the property of their respective owners;
+no endorsement or partnership is implied.
 
-| Name | Creator | Source | License | Modifications | Distribution Status |
-|---|---|---|---|---|---|
-| Leaflet.js | Vladimir Agafonkin and contributors | https://leafletjs.com | BSD 2-Clause | None | Loaded at runtime via unpkg CDN |
-| Chart.js | Chart.js contributors | https://www.chartjs.org | MIT | None | Loaded at runtime via jsDelivr CDN |
+## Map imagery and boundaries
 
-## Map Data
+- © [OpenStreetMap contributors](https://www.openstreetmap.org/copyright).
+  Map data is available under ODbL. Attribution remains visible in map captures.
+- [geohacker/india](https://github.com/geohacker/india): primary state boundary
+  source, published under [MIT](https://github.com/geohacker/india/blob/master/LICENSE).
+- [DataMeet maps](https://github.com/datameet/maps): fallback state boundary
+  source, [CC BY 2.5 India](https://creativecommons.org/licenses/by/2.5/in/).
+  Neither boundary source is an authoritative statement of territorial claims.
 
-| Name | Creator | Source | License | Modifications | Distribution Status |
-|---|---|---|---|---|---|
-| CartoDB Basemap Tiles | CartoDB / OpenStreetMap contributors | https://carto.com | ODbL (OpenStreetMap data) | None | Loaded at runtime as tile layer |
-| India State Boundaries GeoJSON | datameet community | https://github.com/datameet/maps | CC BY 2.5 IN | None | Loaded at runtime via GitHub raw |
+## Libraries used by the hosted demonstration
 
-## Research and Methodology References
+- [Leaflet](https://leafletjs.com): Vladimir Agafonkin and contributors,
+  [BSD 2-Clause](https://github.com/Leaflet/Leaflet/blob/main/LICENSE).
+- [Chart.js](https://www.chartjs.org): Chart.js contributors,
+  [MIT](https://github.com/chartjs/Chart.js/blob/master/LICENSE.md).
 
-| Name | Creator | Source | License | Usage |
-|---|---|---|---|---|
-| Plastic waste inputs from land into the ocean (2015) | Jambeck, J.R. et al. | Science 347(6223), 768-771 | Copyright American Association for the Advancement of Science | Methodology referenced for leakage estimation model |
-| CPCB Annual Report on Plastic Waste Management Rules (2023-24) | Central Pollution Control Board, India | https://cpcb.nic.in | Government of India public domain | Data source for waste generation and collection rate estimates |
-| IMD Climate Normals (1991-2020) | India Meteorological Department | https://imd.gov.in | Government of India public domain | Data source for cooling degree days by climate zone |
-| IS 3792:1978 — Guide for Heat Insulation | Bureau of Indian Standards | https://bis.gov.in | Government of India standard | Methodology referenced for HVAC energy calculations |
+CARTO is no longer the active basemap and no CARTO credential is required.
 
-## Indian Standards Referenced
+## Data and reference limitations
 
-The following BIS standards are referenced in the project documentation and dashboards:
-
-- IS 15462:2019 — Polymer Matrix Composite Wall Panels — Specification
-- IS 3792:1978 — Guide for Heat Insulation of Buildings
-- IS 3346:1980 — Method for Determination of Thermal Conductivity
-- IS 3809:1979 — Method for Fire Resistance Test of Structures
-- IS 16206:2013 — Method for Determination of Resistance to Fungi
-- IS 9845:1998 — Method for Determination of Overall Migration
-- IS 15657:2006 — Method for Determination of Volatile Organic Compounds
-
-These standards are copyright Bureau of Indian Standards and are referenced for specification compliance purposes only.
-
-## Note on Proprietary Data
-
-The batch traceability data, unit economics parameters, and district-level leakage estimates used in the dashboards are based on Circato's operational data and CPCB public datasets. The specific business data, client names, and operational metrics are not distributed as part of this public showcase.
+The old documentation cited CPCB, IMD, BIS and Jambeck et al. without sufficient
+record-level evidence or redistribution terms. This showcase does not certify
+those citations as the provenance of the numerical assumptions. Government
+public availability is not treated as proof of public-domain status.
+No standards compliance, laboratory validation, official EPR integration,
+measured leakage or operational emissions reduction is claimed.

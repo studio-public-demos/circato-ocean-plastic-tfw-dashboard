@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link rel="icon" href="data:,">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Circato — Unit Economics Model: MLP Waste to TFW Panels</title>
@@ -37,9 +38,11 @@ body { font-family: system-ui, -apple-system, sans-serif; background: #f1f5f9; c
 .summary-box.danger { background: linear-gradient(135deg, #fef2f2, #fecaca); border-color: #fca5a5; }
 .summary-box.danger .big-num { color: #991b1b; }
 canvas { max-width: 100%; }
+@media(max-width:600px){.card,.chart-card,.detail-panel{min-width:0}.slider-group label{gap:8px;flex-wrap:wrap}.detail-item .value{overflow-wrap:anywhere}.container{max-width:100%;overflow-x:hidden}}
 </style>
 </head>
 <body>
+<div style="background:#fff7ed;color:#7c2d12;padding:10px 16px;font:12px/1.5 system-ui;flex-shrink:0;overflow-wrap:anywhere">Illustrative demo only. Sample records and scenario assumptions; no customer operations, official filings, certified material properties, or measured environmental savings are represented.</div>
 <div class="header">
   <h1>Unit Economics: MLP Waste to ThermoFused Wall Panels</h1>
   <p>Interactive cost-to-revenue model — adjust sliders to stress-test viability</p>
@@ -69,12 +72,12 @@ canvas { max-width: 100%; }
     <div class="slider-group">
       <label>Quality Testing & Certification <span id="valTesting">₹800</span></label>
       <input type="range" id="sliderTesting" min="200" max="3000" value="800" step="100">
-      <div class="unit">CIPET / NABL lab testing per batch</div>
+      <div class="unit">Illustrative laboratory testing allowance</div>
     </div>
     <div class="slider-group">
       <label>EPR Compliance & Traceability <span id="valEpr">₹400</span></label>
       <input type="range" id="sliderEpr" min="100" max="2000" value="400" step="100">
-      <div class="unit">CPCB reporting, batch ID system</div>
+      <div class="unit">Illustrative reporting and identification allowance</div>
     </div>
   </div>
   <div class="card">
@@ -174,19 +177,19 @@ function update() {
   const verdictDetail = document.getElementById('verdictDetail');
   if (marginPerTonne > 5000) {
     verdictBox.className = 'summary-box';
-    verdictVal.textContent = 'STRONGLY VIABLE';
-    verdictDetail.textContent = 'Significant margin; model is commercially robust at current parameters';
+    verdictVal.textContent = 'ILLUSTRATIVE SURPLUS';
+    verdictDetail.textContent = 'Positive result under the displayed illustrative assumptions; not verified commercial performance';
   } else if (marginPerTonne > 0) {
     verdictBox.className = 'summary-box';
-    verdictVal.textContent = 'VIABLE';
-    verdictDetail.textContent = 'Positive unit economics; sustainable at scale with volume';
+    verdictVal.textContent = 'SCENARIO SURPLUS';
+    verdictDetail.textContent = 'Positive illustrative result; actual operations and scale effects require validation';
   } else if (marginPerTonne > -3000) {
     verdictBox.className = 'summary-box danger';
     verdictVal.textContent = 'MARGINAL';
     verdictDetail.textContent = 'Near break-even; needs volume, EPR credits, or price premium';
   } else {
     verdictBox.className = 'summary-box danger';
-    verdictVal.textContent = 'NOT VIABLE';
+    verdictVal.textContent = 'SCENARIO DEFICIT';
     verdictDetail.textContent = 'Cost structure exceeds revenue; redesign collection or pricing';
   }
 

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link rel="icon" href="data:,">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Circato — Coastal Plastic Leakage & TFW Network Map</title>
@@ -28,12 +29,14 @@ body { display: flex; flex-direction: column; }
   .legend-panel { bottom: 10px; left: 6px; padding: 8px 10px; font-size: 10px; max-width: 180px; }
   .stats-bar { top: 60px; right: 6px; font-size: 10px; padding: 8px; }
 }
+@media(max-width:600px){.stats-bar{position:static;order:3;border-radius:0;box-shadow:none;display:flex;gap:8px;flex-wrap:wrap}.legend-panel{max-height:180px;overflow-y:auto}#map{min-height:300px}.leaflet-control-attribution{max-width:90vw;font-size:8px}}
 </style>
 </head>
 <body>
+<div style="background:#fff7ed;color:#7c2d12;padding:10px 16px;font:12px/1.5 system-ui;flex-shrink:0;overflow-wrap:anywhere">Illustrative demo only. Sample records and scenario assumptions; no customer operations, official filings, certified material properties, or measured environmental savings are represented.</div>
 <div class="header">
   <h1>India: Ocean-Bound Plastic Leakage Hotspots & Circato TFW Network</h1>
-  <span style="font-size:12px;opacity:0.7">Data: CPCB, Jambeck et al., Municipal Reports</span>
+  <span style="font-size:12px;opacity:0.7">Illustrative scenario values; not measured district data</span>
 </div>
 <div class="toggle-panel">
   <span class="group-label">DATA:</span>
@@ -53,8 +56,8 @@ body { display: flex; flex-direction: column; }
   <div class="legend-item"><span class="legend-dot" style="background:#eab308;"></span> Medium (1,500–3,000 t/yr)</div>
   <div class="legend-item"><span class="legend-dot" style="background:#22c55e;"></span> Low (<1,500 t/yr)</div>
   <hr style="margin:6px 0;border-color:#e2e8f0;">
-  <div class="legend-item"><span style="color:#8b5cf6;font-size:16px;">&#9679;</span> TFW Processing</div>
-  <div class="legend-item"><span style="color:#06b6d4;font-size:16px;">&#9632;</span> Collection Hub</div>
+  <div class="legend-item"><span style="color:#8b5cf6;font-size:16px;">&#9679;</span> Example TFW Processing</div>
+  <div class="legend-item"><span style="color:#06b6d4;font-size:16px;">&#9632;</span> Example Collection Hub</div>
   <div class="legend-item"><span style="color:#ec4899;font-size:16px;">&#9733;</span> Target City</div>
   <hr style="margin:6px 0;border-color:#e2e8f0;">
   <div class="legend-item"><span class="legend-line" style="background:#64748b;"></span> State Boundary</div>
@@ -62,16 +65,16 @@ body { display: flex; flex-direction: column; }
   <div class="legend-item"><span class="legend-line" style="background:#0ea5e9;"></span> Coastal Belt (50 km)</div>
 </div>
 <div class="stats-bar" id="stats">
-  <div><strong>National Estimate</strong></div>
+  <div><strong>Illustrative Scenario</strong></div>
   <div>Districts mapped: <span class="val" id="statDistricts">--</span></div>
   <div>Total leakage: <span class="val" id="statLeakage">--</span> t/yr</div>
-  <div>Hubs operational: <span class="val" id="statHubs">--</span></div>
+  <div>Example hubs: <span class="val" id="statHubs">--</span></div>
   <div style="margin-top:4px;font-size:10px;">Coastal states: <span class="val" id="statCoastal">--</span></div>
 </div>
 <script>
 const map = L.map('map', { scrollWheelZoom: true }).setView([20.5, 78.9], 5);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors | Circato',
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors; boundaries: geohacker/india (MIT), DataMeet (CC BY 2.5 IN) | Circato',
   maxZoom: 16
 }).addTo(map);
 
@@ -127,13 +130,13 @@ installationCities.forEach(c => {
     iconAnchor: [9,9]
   });
   const marker = L.marker([c.lat, c.lng], { icon })
-    .bindTooltip(`<b>${c.city}</b> — Target Installation Partner City`);
+    .bindTooltip(`<b>${c.city}</b> — Example target city`);
   citiesLayer.addLayer(marker);
 });
 
 // --- State Boundaries Layer ---
 fetch('https://raw.githubusercontent.com/geohacker/india/master/state/india_state.geojson')
-  .then(r => r.json())
+  .then(r => { if (!r.ok) throw new Error('Boundary unavailable'); return r.json(); })
   .then(geojson => {
     L.geoJSON(geojson, {
       style: {
@@ -153,7 +156,7 @@ fetch('https://raw.githubusercontent.com/geohacker/india/master/state/india_stat
   .catch(() => {
     // Fallback: simplified state boundaries built from outline
     fetch('https://raw.githubusercontent.com/datameet/maps/master/States/India-States.geojson')
-      .then(r => r.json())
+      .then(r => { if (!r.ok) throw new Error('Boundary unavailable'); return r.json(); })
       .then(geojson => {
         L.geoJSON(geojson, {
           style: { color: '#64748b', weight: 1, fillColor: 'transparent', fillOpacity: 0, dashArray: '4 3', opacity: 0.7 },
@@ -162,7 +165,7 @@ fetch('https://raw.githubusercontent.com/geohacker/india/master/state/india_stat
           }
         }).addTo(statesLayer);
         statesLayer.addTo(map);
-      });
+      }).catch(() => { document.getElementById('toggleStates').checked = false; });
   });
 
 // --- River Systems Layer ---
@@ -244,7 +247,7 @@ document.getElementById('toggleCoastal').addEventListener('change', function() {
 
 // Update stats
 const totalLeakage = hotspotData.reduce((s, d) => s + d.leakage, 0);
-const opHubs = processingHubs.filter(h => h.status === 'operational').length;
+const opHubs = processingHubs.filter(h => h.status === 'illustrative-active').length;
 const coastalDistricts = hotspotData.filter(d => d.coastal).length;
 document.getElementById('statDistricts').textContent = hotspotData.length;
 document.getElementById('statLeakage').textContent = totalLeakage.toLocaleString();

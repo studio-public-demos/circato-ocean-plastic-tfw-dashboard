@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link rel="icon" href="data:,">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Circato — Batch Traceability Dashboard</title>
@@ -54,12 +55,14 @@ body { font-family: system-ui, -apple-system, sans-serif; background: #f1f5f9; c
   .flow-steps { flex-direction: column; }
   .flow-arrow { transform: rotate(90deg); }
 }
+@media(max-width:600px){.card,.chart-card,.detail-panel{min-width:0}.slider-group label{gap:8px;flex-wrap:wrap}.detail-item .value{overflow-wrap:anywhere}.container{max-width:100%;overflow-x:hidden}}
 </style>
 </head>
 <body>
+<div style="background:#fff7ed;color:#7c2d12;padding:10px 16px;font:12px/1.5 system-ui;flex-shrink:0;overflow-wrap:anywhere">Illustrative demo only. Sample records and scenario assumptions; no customer operations, official filings, certified material properties, or measured environmental savings are represented.</div>
 <div class="header">
   <h1>Circato Batch Traceability System</h1>
-  <p>End-to-end tracking: Collection → Segregation → Processing → TFW Panel → Construction Site · Integrated with CPCB EPR</p>
+  <p>End-to-end tracking: Collection → Segregation → Processing → TFW Panel → Construction Site · Sample EPR-style records; no filing connection</p>
 </div>
 <div class="container">
   <div class="kpi-strip" id="kpiStrip"></div>
@@ -72,7 +75,7 @@ body { font-family: system-ui, -apple-system, sans-serif; background: #f1f5f9; c
       <div class="flow-step">Shredding</div><div class="flow-arrow">→</div>
       <div class="flow-step">Extrusion</div><div class="flow-arrow">→</div>
       <div class="flow-step">ThermoFusion</div><div class="flow-arrow">→</div>
-      <div class="flow-step">Certification</div><div class="flow-arrow">→</div>
+      <div class="flow-step">Sample review</div><div class="flow-arrow">→</div>
       <div class="flow-step">Construction Site</div>
     </div>
   </div>
@@ -109,9 +112,9 @@ body { font-family: system-ui, -apple-system, sans-serif; background: #f1f5f9; c
 <script>
 // KPI strip
 document.getElementById('kpiStrip').innerHTML = `
-  <div class="kpi-card"><div class="val">${totalWeight.toLocaleString()} kg</div><div class="lbl">Total Waste Processed</div></div>
-  <div class="kpi-card"><div class="val">${totalPanels}</div><div class="lbl">TFW Panels Produced</div></div>
-  <div class="kpi-card"><div class="val">${totalCO2.toLocaleString()} kg</div><div class="lbl">CO₂ Offset</div></div>
+  <div class="kpi-card"><div class="val">${totalWeight.toLocaleString()} kg</div><div class="lbl">Sample Waste Total</div></div>
+  <div class="kpi-card"><div class="val">${totalPanels}</div><div class="lbl">Sample Panel Total</div></div>
+  <div class="kpi-card"><div class="val">${totalCO2.toLocaleString()} kg</div><div class="lbl">Illustrative CO₂ Scenario</div></div>
   <div class="kpi-card"><div class="val">${batchesCount}</div><div class="lbl">Traceable Batches</div></div>
 `;
 
@@ -149,8 +152,8 @@ function showDetail(b) {
     <div class="detail-item"><div class="key">Construction Site</div><div class="value">${b.constructionSite}</div></div>
     <div class="detail-item"><div class="key">Installer</div><div class="value">${b.installer}</div></div>
     <div class="detail-item"><div class="key">EPR Filing</div><div class="value">${b.epfFiling}</div></div>
-    <div class="detail-item"><div class="key">Certified By</div><div class="value">${b.certifiedBy}</div></div>
-    <div class="detail-item"><div class="key">CO₂ Offset</div><div class="value">${b.co2OffsetKg.toLocaleString()} kg</div></div>
+    <div class="detail-item"><div class="key">Illustrative review</div><div class="value">${b.certifiedBy}</div></div>
+    <div class="detail-item"><div class="key">Illustrative CO₂ Scenario</div><div class="value">${b.co2OffsetKg.toLocaleString()} kg</div></div>
   `;
 
   document.getElementById('detailTimeline').innerHTML = `
